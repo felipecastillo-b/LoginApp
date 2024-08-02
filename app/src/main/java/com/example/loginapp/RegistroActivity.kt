@@ -50,7 +50,7 @@ class RegistroActivity : AppCompatActivity() {
     inner class GetRegistrosTask : AsyncTask<Void, Void, String>() {
 
         override fun doInBackground(vararg params: Void?): String {
-            val url = URL("http://192.168.145.36/loginapp_server/getRegister.php")
+            val url = URL("http://10.0.2.2/loginapp_server/getRegister.php")
             val connection = url.openConnection() as HttpURLConnection
             connection.requestMethod = "GET"
 

@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
     // Funcion para manejar el inicio de sesion
     private fun login(email: String, password: String) {
         // URL del script PHP del servidor que maneja el inicio de sesion, tambien puede ser un servidor en la nube o local
-        val url = "http://192.168.145.36/loginapp_server/login.php"
+        val url = "http://10.0.2.2/loginapp_server/login.php"
         // crea una solicitud HTTP POST utilizando la libreria Volley
         val stringRequest = object : StringRequest(Request.Method.POST, url,
             Response.Listener<String> { response ->

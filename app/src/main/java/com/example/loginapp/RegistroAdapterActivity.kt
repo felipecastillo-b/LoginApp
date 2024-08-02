@@ -46,22 +46,32 @@ class RegistroAdapterActivity(private val registros: MutableList<Registro>) : Re
         holder.sensor_5TextView.text = "Sensor 5: " + registro.sensor5.toString()
         holder.fechaTextView.text = "Fecha: " + registro.fechaHora
 
-        val intensidad = registro.sensor1 + registro.sensor2 + registro.sensor3 + registro.sensor4 + registro.sensor5
+        // Encuentra el valor mas grande dentro de los registro.sensor
+        val maxSensorValue = maxOf(
+            registro.sensor1,
+            registro.sensor2,
+            registro.sensor3,
+            registro.sensor4,
+            registro.sensor5
+        )
 
-        if (intensidad >= 0 && intensidad <= 499) {
-            holder.ledVerdeImageView.setImageResource(R.drawable.led_verde_encendido)
-            holder.ledAmarilloImageView.setImageResource(R.drawable.led_amarillo_apagado)
-            holder.ledRojoImageView.setImageResource(R.drawable.led_rojo_apagado)
-        } else if (intensidad >= 500 && intensidad <= 700) {
-            holder.ledVerdeImageView.setImageResource(R.drawable.led_verde_apagado)
-            holder.ledAmarilloImageView.setImageResource(R.drawable.led_amarillo_encendido)
-            holder.ledRojoImageView.setImageResource(R.drawable.led_rojo_apagado)
-        } else if (intensidad >= 701 && intensidad <= 1000) {
-            holder.ledVerdeImageView.setImageResource(R.drawable.led_verde_apagado)
-            holder.ledAmarilloImageView.setImageResource(R.drawable.led_amarillo_apagado)
-            holder.ledRojoImageView.setImageResource(R.drawable.led_rojo_encendido)
-        } else {
-            // Manejo de otros casos fuera de los rangos especificados (opcional)
+        // Arroja el LED segun el valor mas alto dentro de los registro.sensor
+        when {
+            maxSensorValue in 0..499 -> {
+                holder.ledVerdeImageView.setImageResource(R.drawable.led_verde_encendido)
+                holder.ledAmarilloImageView.setImageResource(R.drawable.led_amarillo_apagado)
+                holder.ledRojoImageView.setImageResource(R.drawable.led_rojo_apagado)
+            }
+            maxSensorValue in 500..700 -> {
+                holder.ledVerdeImageView.setImageResource(R.drawable.led_verde_apagado)
+                holder.ledAmarilloImageView.setImageResource(R.drawable.led_amarillo_encendido)
+                holder.ledRojoImageView.setImageResource(R.drawable.led_rojo_apagado)
+            }
+            maxSensorValue in 701..1000 -> {
+                holder.ledVerdeImageView.setImageResource(R.drawable.led_verde_apagado)
+                holder.ledAmarilloImageView.setImageResource(R.drawable.led_amarillo_apagado)
+                holder.ledRojoImageView.setImageResource(R.drawable.led_rojo_encendido)
+            }
         }
     }
 
